@@ -1,0 +1,9 @@
+{
+  "name": "@tracktr/postcss-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./postcss": "./postcss.config.js",
+    "./tailwind": "./tailwind.config.js"
+  }
+}
