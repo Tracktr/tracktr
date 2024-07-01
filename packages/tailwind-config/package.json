@@ -1,0 +1,11 @@
+{
+  "name": "@tracktr/tailwind-config",
+  "version": "0.0.0",
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.13",
+    "tailwindcss": "^3.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

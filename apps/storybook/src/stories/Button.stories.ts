@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@repo/ui/button";
+import { Button } from "@tracktr/ui/button";
 
 const meta = {
   title: "Example/Button",
@@ -12,7 +12,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    appName: "Button",
     children: "I am a primary button.",
   },
 };

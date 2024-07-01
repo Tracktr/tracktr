@@ -1,7 +1,10 @@
 import type { Config } from "tailwindcss";
 
+import sharedConfig from "../tailwind-config";
+
 const config = {
-  content: ["./src/stories/**/*.{ts,tsx}", "../../packages/ui/**/*.{ts,tsx}"],
+  ...sharedConfig,
+  content: ["*.{ts,tsx}"],
 } satisfies Config;
 
 export default config;
