@@ -172,9 +172,6 @@ importers:
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
-      postcss:
-        specifier: ^8
-        version: 8.4.39
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4(ts-node@10.9.1(@types/node@20.11.24)(typescript@5.3.3))
