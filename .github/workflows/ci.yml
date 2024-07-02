@@ -27,6 +27,6 @@ jobs:
         run: pnpm exec playwright install --with-deps
 
       - name: Run Storybook tests
-        run: pnpm test-storybook --
+        run: pnpm test-storybook -- url=${{ github.event.deployment_status.target_url }}
         env:
           TARGET_URL: "${{ github.event.deployment_status.target_url }}"
