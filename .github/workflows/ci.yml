@@ -23,6 +23,7 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright Browsers
+        working-directory: apps/storybook
         run: pnpm exec playwright install --with-deps
 
       - name: Run Storybook tests

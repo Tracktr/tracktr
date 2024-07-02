@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      playwright:
-        specifier: ^1.45.0
-        version: 1.45.0
     devDependencies:
       prettier:
         specifier: ^3.2.5
