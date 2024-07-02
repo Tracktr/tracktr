@@ -1,7 +1,6 @@
 name: Test apps/storybook
 
 on: deployment_status
-
 jobs:
   test:
     timeout-minutes: 5
@@ -22,9 +21,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-
-      - name: Install dependencies
-        run: pnpm install playwright
 
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
