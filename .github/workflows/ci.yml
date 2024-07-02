@@ -1,24 +1,14 @@
-name: CI
+name: Test apps/storybook
 
-on:
-  push:
-    branches: ["main"]
-  pull_request:
-    types: [opened, synchronize]
+on: deployment_status
 
 jobs:
-  build:
-    name: Build and Test
+  test:
     timeout-minutes: 5
     runs-on: ubuntu-latest
-    # To use Remote Caching, uncomment the next lines and follow the steps below.
-    # env:
-    #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-    #  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-
+    if: github.event.deployment_status.state == 'success'
     steps:
-      - name: Check out code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v3
         with:
@@ -39,8 +29,7 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
 
-      - name: Build
-        run: pnpm build
-
-      - name: Test storybook
-        run: pnpm test:storybook
+      - name: Run Storybook tests
+        run: pnpm test-storybook
+        env:
+          TARGET_URL: "${{ github.event.deployment_status.target_url }}"
