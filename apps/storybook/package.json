@@ -13,7 +13,6 @@
     "@tracktr/typescript-config": "workspace:*",
     "@tracktr/ui": "workspace:*",
     "next": "14.2.4",
-    "playwright": "^1.45.0",
     "react": "^18",
     "react-dom": "^18"
   },
