@@ -21,5 +21,9 @@ export const Primary: Story = {
     const button = canvas.getByRole("button");
 
     await userEvent.click(button);
+
+    throw new Error(
+      "This is an error message, intentionally left here to test the pipeline"
+    );
   },
 };
