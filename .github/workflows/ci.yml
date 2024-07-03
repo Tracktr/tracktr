@@ -1,0 +1,32 @@
+name: Test apps/storybook
+
+on: deployment_status
+jobs:
+  test:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Install Playwright Browsers
+        working-directory: apps/storybook
+        run: pnpm exec playwright install --with-deps
+
+      - name: Run Storybook tests
+        run: pnpm test-storybook -- --url ${{ github.event.deployment_status.target_url }}
+        env:
+          TARGET_URL: "${{ github.event.deployment_status.target_url }}"
