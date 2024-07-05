@@ -8,6 +8,15 @@ const config = {
     "./content/**/*.{md,mdx}",
     "../../packages/ui/src/**/*.{ts,tsx}",
   ],
+  theme: {
+    extend: {
+      colors: {
+        tracktr: {
+          500: "#ffca2b",
+        },
+      },
+    },
+  },
 } satisfies Config;
 
 export default config;

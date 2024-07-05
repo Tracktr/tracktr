@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-import sharedConfig from "../tailwind-config";
+import sharedConfig from "@tracktr/tailwind-config/index";
 
 const config = {
   ...sharedConfig,
