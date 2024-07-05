@@ -8,10 +8,9 @@ import {
   Delete,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-
-import { CreateMoviesDto } from 'src/generated/nestjs-dto/create-movies.dto';
-import { UpdateMoviesDto } from 'src/generated/nestjs-dto/update-movies.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { CreateMoviesDto } from './dto/create-movies.dto';
+import { UpdateMoviesDto } from './dto/update-movies.dto';
 
 @Controller('movies')
 @ApiTags('Movies')
@@ -19,7 +18,6 @@ export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create movie' })
   create(@Body() data: CreateMoviesDto) {
     return this.moviesService.create(data);
   }
