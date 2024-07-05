@@ -2,9 +2,9 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["generate","^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "storybook-static/**", "dist/main/**"]
+      "outputs": [".next/**", "!.next/cache/**", "storybook-static/**", "dist/**"]
     },
     "test-storybook": {
       "dependsOn": ["^build"],
