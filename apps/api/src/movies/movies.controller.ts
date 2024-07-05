@@ -8,8 +8,10 @@ import {
   Delete,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
-import { ApiTags } from '@nestjs/swagger';
-import { Movies } from '@prisma/client';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+
+import { CreateMoviesDto } from 'src/generated/nestjs-dto/create-movies.dto';
+import { UpdateMoviesDto } from 'src/generated/nestjs-dto/update-movies.dto';
 
 @Controller('movies')
 @ApiTags('Movies')
@@ -17,7 +19,8 @@ export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
   @Post()
-  create(@Body() data: Movies) {
+  @ApiOperation({ summary: 'Create movie' })
+  create(@Body() data: CreateMoviesDto) {
     return this.moviesService.create(data);
   }
 
@@ -32,7 +35,7 @@ export class MoviesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() data: Movies) {
+  update(@Param('id') id: number, @Body() data: UpdateMoviesDto) {
     return this.moviesService.update({
       where: { id: id },
       data,
