@@ -44,7 +44,7 @@ COPY turbo.json turbo.json
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
 
-RUN npx prisma generate
+# RUN npx prisma generate
 
 RUN pnpm turbo build --filter=api...
 
@@ -60,4 +60,4 @@ COPY --from=installer /app .
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
 
-CMD node apps/api/dist/main
+CMD ["node", "apps/api/dist/main"]
