@@ -8,16 +8,15 @@ phases:
   pre_build:
     commands:
       - echo log in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username $ECR_LOGIN_USER --password-stdin $ECR_LOGIN_PASS
+      - $(aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_LOGIN_PASS)
       - REPOSITORY_URI=$REPO_URL
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image.
-      - echo log in to Amazon ECR...
       - aws --version
-      - docker build -t $REPO_NAME .
+      - docker build -f apps/api/Dockerfile . --build-arg DATABASE_URL=“[DATABASE_URL]” --no-cache -t $REPO_NAME .
       - docker tag $REPO_NAME:latest $REPOSITORY_URI:latest
   post_build:
     commands:
