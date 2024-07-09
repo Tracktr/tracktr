@@ -1,45 +1,47 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Inject, Injectable } from '@nestjs/common';
 import { Movies } from './entities/movies.entity';
 import { CreateMoviesDto } from './dto/create-movies.dto';
 import { UpdateMoviesDto } from './dto/update-movies.dto';
+import * as schema from '../../db/schema';
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { eq } from 'drizzle-orm';
 
 @Injectable()
 export class MoviesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @Inject('DB_PROD') private drizzleProd: NodePgDatabase<typeof schema>,
+  ) {}
 
-  async findUnique(moviesWhereUniqueInput: {
+  async findUnique(id: number) {
+    return this.drizzleProd.query.movies.findFirst({
+      where: eq(schema.movies.id, id),
+    });
+  }
+
+  async findMany() {
+    return this.drizzleProd.query.movies.findMany();
+  }
+
+  async create(data: CreateMoviesDto) {
+    return this.drizzleProd.insert(schema.movies).values(data);
+  }
+
+  async update({
+    id,
+    data,
+  }: {
     id: number;
-  }): Promise<Movies | null> {
-    return this.prisma.movies.findUnique({
-      where: moviesWhereUniqueInput,
-    });
-  }
-
-  async findMany(): Promise<Movies[]> {
-    return this.prisma.movies.findMany();
-  }
-
-  async create(data: CreateMoviesDto): Promise<Movies> {
-    return this.prisma.movies.create({
-      data,
-    });
-  }
-
-  async update(params: {
-    where: { id: number };
     data: UpdateMoviesDto;
   }): Promise<Movies> {
-    const { data, where } = params;
-    return this.prisma.movies.update({
-      data,
-      where,
-    });
+    return this.drizzleProd
+      .update(schema.movies)
+      .set(data)
+      .where(eq(schema.movies.id, id));
   }
 
   async delete(where: { id: number }): Promise<Movies> {
-    return this.prisma.movies.delete({
-      where,
-    });
+    return this.drizzleProd
+      .delete(schema.movies)
+      .where(eq(schema.movies.id, where.id));
   }
 }

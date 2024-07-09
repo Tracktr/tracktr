@@ -1,5 +1,3 @@
-
-  export class ConnectMoviesDto {
-    id: number;
-  }
-  
+export class ConnectMoviesDto {
+  id: number;
+}

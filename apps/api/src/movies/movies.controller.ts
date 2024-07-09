@@ -29,13 +29,13 @@ export class MoviesController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.moviesService.findUnique({ id });
+    return this.moviesService.findUnique(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: number, @Body() data: UpdateMoviesDto) {
     return this.moviesService.update({
-      where: { id: id },
+      id,
       data,
     });
   }
