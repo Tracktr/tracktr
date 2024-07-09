@@ -24,7 +24,7 @@ export class MoviesController {
 
   @Get()
   findAll() {
-    return this.moviesService.findMany({});
+    return this.moviesService.findMany();
   }
 
   @Get(':id')
