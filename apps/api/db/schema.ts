@@ -1,7 +1,7 @@
-import { pgTable, integer, text } from 'drizzle-orm/pg-core';
+import { pgTable, integer, text, serial } from 'drizzle-orm/pg-core';
 
 export const movies = pgTable('movies', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  id: serial('id').primaryKey(), // shouldn't use serial
   title: text('title').notNull(),
   poster: text('poster'),
   year: integer('year'),

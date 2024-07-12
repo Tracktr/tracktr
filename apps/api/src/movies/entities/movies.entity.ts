@@ -1,6 +1,6 @@
 export class Movies {
   id: number;
   title: string;
-  poster: string;
-  year: number;
+  poster?: string;
+  year?: number;
 }

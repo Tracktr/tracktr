@@ -7,7 +7,7 @@ export class CreateMoviesDto {
 
   @IsOptional()
   @IsString()
-  poster: string;
+  poster?: string;
 
   @IsOptional()
   @IsNumber()

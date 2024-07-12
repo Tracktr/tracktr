@@ -13,17 +13,20 @@ export class MoviesService {
   ) {}
 
   async findUnique(id: number) {
-    return this.drizzleProd.query.movies.findFirst({
+    return await this.drizzleProd.query.movies.findFirst({
       where: eq(schema.movies.id, id),
     });
   }
 
   async findMany() {
-    return this.drizzleProd.query.movies.findMany();
+    return await this.drizzleProd.query.movies.findMany();
   }
 
   async create(data: CreateMoviesDto) {
-    return this.drizzleProd.insert(schema.movies).values(data);
+    return await this.drizzleProd
+      .insert(schema.movies)
+      .values(data)
+      .returning();
   }
 
   async update({
@@ -32,16 +35,21 @@ export class MoviesService {
   }: {
     id: number;
     data: UpdateMoviesDto;
-  }): Promise<Movies> {
-    return this.drizzleProd
+  }): Promise<Movies[]> {
+    data.id = id;
+
+    return await this.drizzleProd
       .update(schema.movies)
       .set(data)
-      .where(eq(schema.movies.id, id));
+      .where(eq(schema.movies.id, id))
+      .returning();
   }
 
-  async delete(where: { id: number }): Promise<Movies> {
-    return this.drizzleProd
+  async delete(where: { id: number }): Promise<Movies[]> {
+    await this.drizzleProd
       .delete(schema.movies)
       .where(eq(schema.movies.id, where.id));
+
+    return;
   }
 }
