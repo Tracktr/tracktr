@@ -12,7 +12,7 @@ export class MoviesService {
     @Inject('DB_PROD') private drizzleProd: NodePgDatabase<typeof schema>,
   ) {}
 
-  async findUnique(id: number) {
+  async findFirst(id: number) {
     return await this.drizzleProd.query.movies.findFirst({
       where: eq(schema.movies.id, id),
     });
@@ -45,10 +45,10 @@ export class MoviesService {
       .returning();
   }
 
-  async delete(where: { id: number }): Promise<Movies[]> {
+  async delete(id: number): Promise<Movies[]> {
     await this.drizzleProd
       .delete(schema.movies)
-      .where(eq(schema.movies.id, where.id));
+      .where(eq(schema.movies.id, id));
 
     return;
   }

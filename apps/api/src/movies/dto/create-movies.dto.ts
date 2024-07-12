@@ -1,6 +1,8 @@
 import { IsNotEmpty, IsString, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateMoviesDto {
+  id: number;
+
   @IsNotEmpty()
   @IsString()
   title: string;

@@ -29,7 +29,7 @@ export class MoviesController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.moviesService.findUnique(id);
+    return this.moviesService.findFirst(id);
   }
 
   @Patch(':id')
@@ -42,6 +42,6 @@ export class MoviesController {
 
   @Delete(':id')
   remove(@Param('id') id: number) {
-    return this.moviesService.delete({ id });
+    return this.moviesService.delete(id);
   }
 }

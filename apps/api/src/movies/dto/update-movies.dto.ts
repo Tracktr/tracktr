@@ -1,18 +1,4 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { PartialType } from '@nestjs/swagger';
+import { CreateMoviesDto } from './create-movies.dto';
 
-export class UpdateMoviesDto {
-  @IsNumber()
-  id: number;
-
-  @IsOptional()
-  @IsString()
-  title: string;
-
-  @IsOptional()
-  @IsString()
-  poster?: string;
-
-  @IsOptional()
-  @IsNumber()
-  year?: number;
-}
+export class UpdateMoviesDto extends PartialType(CreateMoviesDto) {}
