@@ -1,6 +1,15 @@
+import { IsNotEmpty, IsString, IsOptional, IsNumber } from 'class-validator';
+
 export class CreateMoviesDto {
-  id: number;
+  @IsNotEmpty()
+  @IsString()
   title: string;
+
+  @IsOptional()
+  @IsString()
   poster: string;
-  year: number;
+
+  @IsOptional()
+  @IsNumber()
+  year?: number;
 }

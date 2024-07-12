@@ -1,5 +1,15 @@
+import { IsNumber, IsOptional, IsString } from 'class-validator';
+
 export class UpdateMoviesDto {
-  title?: string;
-  poster?: string;
+  @IsOptional()
+  @IsString()
+  title: string;
+
+  @IsOptional()
+  @IsString()
+  poster: string;
+
+  @IsOptional()
+  @IsNumber()
   year?: number;
 }
