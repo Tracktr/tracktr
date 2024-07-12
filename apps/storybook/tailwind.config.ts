@@ -1,6 +1,9 @@
 import type { Config } from "tailwindcss";
 
+import sharedConfig from "@tracktr/tailwind-config/index";
+
 const config = {
+  ...sharedConfig,
   content: ["./src/stories/**/*.{ts,tsx}", "../../packages/ui/**/*.{ts,tsx}"],
 } satisfies Config;
 
